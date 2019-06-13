@@ -1,12 +1,13 @@
-import { State } from './states'
+import { State, TimerState, WorkoutStage } from './states'
 import { ActionType } from './actionTypes'
 import { SetterActionBase, ActionBase } from './actionBase'
 import { Exercise } from './exercise'
 
 export type GetState = () => State
 
-export type ThunkAction = (getState: GetState, dispatch: Dispatch) => void
-export type ChainableThunkAction<T> = (getState: GetState, dispatch: Dispatch) => Promise<T>
+export type ThunkAction = (dispatch: Dispatch, getState: GetState) => void
+export type ChainableThunkAction<T> = (dispatch: Dispatch, getState: GetState) => Promise<T>
+export type AllActions = Action | ThunkAction
 
 export interface Dispatch {
   <T>(action: ChainableThunkAction<T>): Promise<T>
@@ -14,12 +15,18 @@ export interface Dispatch {
 }
 
 export type Action = TickTimerAction
-| SetRemainingTime
-| SetExercises
+| SetRemainingTimeAction
+| SetExercisesAction
+| SetTimerStateAction
+| SetWorkoutStageAction
 
 
 export interface TickTimerAction extends ActionBase<ActionType.TickTimer> {}
 
-export interface SetRemainingTime extends SetterActionBase<ActionType.SetRemainingTime, number> {}
+export interface SetRemainingTimeAction extends SetterActionBase<ActionType.SetRemainingTime, number> {}
 
-export interface SetExercises extends SetterActionBase<ActionType.SetExercises, Exercise[]> {}
+export interface SetExercisesAction extends SetterActionBase<ActionType.SetExercises, Exercise[]> {}
+
+export interface SetTimerStateAction extends SetterActionBase<ActionType.SetTimerState, TimerState> {}
+
+export interface SetWorkoutStageAction extends SetterActionBase<ActionType.SetWorkoutStage, WorkoutStage> {}
