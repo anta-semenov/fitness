@@ -8,28 +8,52 @@ import { RoundButton } from 'components/common'
 import { ExerciseRow } from './Exercise'
 
 const AppNavigatorComponent = (props: StateProps & DispatchProps) => {
+  const currentExercise = props.exercises[0]
+  const isWorkoutPused = currentExercise.type === ExerciseType.Pause
+  const isCompleted = currentExercise.type === ExerciseType.Done
+  const shouldGoNext = currentExercise.duration === 0 && currentExercise.type === ExerciseType.Exercise
   return (
     <View style={ [styles.container] }>
-      <Text style={ [styles.timer, { color: getColorForExerciseType(props.exercises[0].type) }] }>{ props.remainingTime }</Text>
+      <Text style={ [styles.timer, { color: getColorForExerciseType(currentExercise.type) }] }>{ props.remainingTime }</Text>
       {
-        props.isTimerActive
-        ?
-          <RoundButton onPress={ props.startPauseTimer } title='Pause' color={ Colors.navy }/>
-        :
-          <View style={ styles.row }>
+        props.isTimerActive &&
+        <RoundButton onPress={ props.startPauseTimer } title='Pause' color={ Colors.navy }/>
+      }
+      {
+        isCompleted &&
+        <RoundButton onPress={ props.resetWorkout } title='Restart' color={ Colors.red }/>
+      }
+      {
+        !props.isTimerActive && !isCompleted &&
+        <View style={ styles.row }>
+          {
+            isWorkoutPused && !shouldGoNext &&
+            <RoundButton onPress={ props.nextExercise } title='Start' color={ Colors.navy }/>
+          }
+          {
+            shouldGoNext && !isWorkoutPused &&
+            <RoundButton onPress={ props.startPauseTimer } title='Next'/>
+          }
+          {
+            !isWorkoutPused && !shouldGoNext &&
             <RoundButton onPress={ props.startPauseTimer } title='Resume'/>
-            <RoundButton onPress={ props.resetWorkout } title='Reset' color={ Colors.red }/>
-          </View>
+          }
+          <RoundButton onPress={ props.resetWorkout } title='Reset' color={ Colors.red }/>
+        </View>
       }
       <ScrollView style={ styles.scroll }>
-        { props.exercises.map((exercise, index) => (
-          <ExerciseRow
-            key={ `${exercise.name}_${index}` }
-            exercise={ exercise }
-            isActive={ props.exercises[0].type !== ExerciseType.Rest ? index === 0 : index === 1 }
-            onButtonPress={ exercise.type === ExerciseType.Pause ? props.startPauseTimer : props.nextExercise }
-          />
-        )) }
+        { props.exercises.map((exercise, index) => {
+          const isActive = index === props.exercises.findIndex(({ type }) => type !== ExerciseType.Pause && type !== ExerciseType.Rest)
+          return (
+            <ExerciseRow
+              key={ `${exercise.name}_${index}` }
+              exercise={ exercise }
+              isActive={ isActive }
+              onButtonPress={ exercise.type === ExerciseType.Pause ? props.startPauseTimer : props.nextExercise }
+              shouldHide={ exercise.type === ExerciseType.Pause && index === 0 }
+            />
+          )
+        }) }
       </ScrollView>
     </View>
   )

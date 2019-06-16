@@ -16,7 +16,7 @@ export const initWorkout = (): ThunkAction => (dispatch) => {
       index === 7 ? undefined : warmUpRest,
     ].filterNull())
     .flatten()
-  exercises = [pause, warmUpRest, ...warmUp, pause]
+  exercises = [pause(), warmUpRest, ...warmUp, pause('Warm up completed!')]
 
   // Workout
   let optional1 = optionalExercisesPart1.randomElement()
@@ -48,7 +48,7 @@ export const initWorkout = (): ThunkAction => (dispatch) => {
     ].filterNull())
     .flatten()
 
-  exercises = [...exercises, warmUpRest, ...workOut, exerciseRoundRest, ...workOut, pause, ...afterWorkout]
+  exercises = [...exercises, warmUpRest, ...workOut, exerciseRoundRest, ...workOut, pause('Main workout completed!'), ...afterWorkout]
 
   dispatch(setExercises(exercises))
   dispatch(setRemainingTime(exercises[0].duration))

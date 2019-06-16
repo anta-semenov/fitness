@@ -5,11 +5,11 @@ const exerciseRestDuration = 20
 const warmUpDuration = 30
 const warmUpRestDuration = 5
 
-export const pause: Exercise = {
+export const pause = (name: string = 'Pause'): Exercise => ({
   type: ExerciseType.Pause,
   duration: 0,
-  name: 'Pause',
-}
+  name,
+})
 
 export const exerciseRest: Exercise = {
   type: ExerciseType.Rest,
@@ -540,4 +540,9 @@ export const afterWorkout: Exercise[] = [
     duration: 60,
     name: 'Boarder pulsing squats',
   },
+  {
+    type: ExerciseType.Done,
+    duration: 0,
+    name: 'Workout completed!'
+  }
 ]

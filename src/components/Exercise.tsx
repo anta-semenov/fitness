@@ -8,9 +8,13 @@ interface Props {
   exercise: Exercise
   isActive: boolean
   onButtonPress: () => void
+  shouldHide: boolean
 }
 
 export const ExerciseRow = (props: Props) => {
+  if (props.shouldHide) {
+    return null
+  }
   const containerStyles = [
     styles.container,
     props.isActive ? styles.active : null,

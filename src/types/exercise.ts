@@ -3,6 +3,7 @@ export enum ExerciseType {
   Exercise = 'Exercise',
   Rest = 'Rest',
   Pause = 'Pause',
+  Done = 'Done',
 }
 
 export interface Exercise {
