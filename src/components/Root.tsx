@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { configureStore } from 'store/'
 import { AppNavigator } from './AppNavigator'
 import { initWorkout, initTimer } from 'actions/'
+import 'majime'
 
 const store = configureStore()
 

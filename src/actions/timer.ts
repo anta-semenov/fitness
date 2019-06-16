@@ -1,7 +1,7 @@
-import { SetTimerStateAction, SetRemainingTimeAction, TickTimerAction, TimerState, ActionType, ThunkAction } from 'types/'
-
-export const setTimerState = (payload: TimerState): SetTimerStateAction => ({ type: ActionType.SetTimerState, payload })
-export const tickTimer = (): TickTimerAction => ({ type: ActionType.TickTimer })
+import { TimerState, ThunkAction, AudioEffect, ExerciseType } from 'types/'
+import { playSound } from './audio'
+import { tickTimer, setRemainingTime, setTimerState, setExercises } from './pure'
+import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
 
 let interval
 
@@ -14,14 +14,46 @@ export const initTimer = (): ThunkAction => (dispatch) => {
 }
 
 const everySecond = (): ThunkAction => (dispatch, getState) => {
-  if (getState().timerState === TimerState.Active && getState().remainingTime > 0) {
+  const remainingTime = getState().remainingTime
+  const activeExercise = getState().exercises[0]
+  if (getState().timerState === TimerState.Active && remainingTime > 0) {
     dispatch(tickTimer())
+    if (remainingTime === 6) {
+      dispatch(playSound(AudioEffect.Attention))
+    } else if (remainingTime === 3 || remainingTime === 2) {
+      dispatch(playSound(AudioEffect.Ready))
+    } else if (remainingTime === 1) {
+      dispatch(playSound(AudioEffect.Go))
+    } else if (remainingTime === 21 && activeExercise != null && activeExercise.switchInTheMiddle) {
+      dispatch(playSound(AudioEffect.Attention))
+    }
   } else if (getState().timerState === TimerState.Active && getState().remainingTime === 0) {
     dispatch(setTimerState(TimerState.Pause))
-    dispatch(timerFinished())
+    deactivateKeepAwake()
+    dispatch(nextExercise())
+
   }
 }
 
-export const setRemainingTime = (payload: number): SetRemainingTimeAction => ({ type: ActionType.SetRemainingTime, payload })
+export const nextExercise = (): ThunkAction => (dispatch, getState) => {
+  const state = getState()
+  if (state.exercises.length > 0) {
+    const newExercises = state.exercises.slice(1)
+    dispatch(setExercises(newExercises))
+    dispatch(setRemainingTime(newExercises[0].duration))
+    if (newExercises[0].type !== ExerciseType.Pause && newExercises[0].duration !== 0) {
+      dispatch(setTimerState(TimerState.Active))
+      activateKeepAwake()
+    }
+  }
+}
 
-const timerFinished = (): ThunkAction => () => {}
+export const startPauseTimer = (start?: boolean): ThunkAction => (dispatch, getState) => {
+  if (start !== true && getState().timerState === TimerState.Active) {
+    dispatch(setTimerState(TimerState.Pause))
+    deactivateKeepAwake()
+  } else {
+    dispatch(setTimerState(TimerState.Active))
+    activateKeepAwake()
+  }
+}

@@ -1,10 +1,11 @@
 import { combineReducers } from 'redux'
 import { State, Action, ActionType,TimerState, WorkoutStage } from 'types/'
 import { setterActionReducer } from './utils'
+import { pause } from 'data/'
 
 export const initialState: State = {
   remainingTime: 0,
-  exercises: [],
+  exercises: [pause],
   timerState: TimerState.Pause,
   workoutStage: WorkoutStage.Idle,
 }
