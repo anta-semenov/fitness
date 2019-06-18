@@ -22,13 +22,13 @@ export const initWorkout = (): ThunkAction => (dispatch) => {
   let optional1 = optionalExercisesPart1.randomElement()
   let optional2 = optionalExercisesPart2.randomElement()
   if (optional1.needPair) {
-    optional1 = {
-      ...optional1,
-      name: `${optional1.name} R`
-    }
     optional2 = {
       ...optional1,
       name: `${optional1.name} L`
+    }
+    optional1 = {
+      ...optional1,
+      name: `${optional1.name} R`
     }
   }
 
