@@ -81,13 +81,7 @@ export const pushUps: Exercise[] = [
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
     name: 'Narrow to wide push ups',
-    description: 'Переходишь из узких в широкие отжимания "прыжком"'
-  },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
-    name: 'Plyo push ups',
-    description: 'В верхней фазе делаешь прыжок и дотрагиваешься руками до груди'
+    description: 'Переходишь из узких в широкие отжимания, почти как в stagger'
   },
   {
     type: ExerciseType.Exercise,
