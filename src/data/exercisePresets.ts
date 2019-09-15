@@ -589,19 +589,34 @@ export const warmUpLegs: Exercise[] = [
 export const afterWorkout: Exercise[] = [
   warmUpRest,
   {
-    type: ExerciseType.Exercise,
-    duration: 55,
+    type: ExerciseType.RequiredExercise,
+    duration: 50,
     name: 'Boarder pulsing squats',
   },
   {
-    type: ExerciseType.Exercise,
+    type: ExerciseType.RequiredExercise,
     duration: 0,
-    name: 'Sit ups 100',
+    name: 'Sit ups 40',
+  },
+  {
+    type: ExerciseType.RequiredExercise,
+    duration: 0,
+    name: 'Beetle 20 with weightings',
+  },
+  {
+    type: ExerciseType.RequiredExercise,
+    duration: 0,
+    name: 'Leg rises 20 with weightings',
+  },
+  {
+    type: ExerciseType.RequiredExercise,
+    duration: 0,
+    name: 'Knee tuck crunches 20 with weightings',
   },
   warmUpRest,
   {
-    type: ExerciseType.Exercise,
-    duration: 60,
+    type: ExerciseType.RequiredExercise,
+    duration: 50,
     name: 'Boarder pulsing squats',
   },
   {
