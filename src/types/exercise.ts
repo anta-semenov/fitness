@@ -6,6 +6,10 @@ export enum ExerciseType {
   Done = 'Done',
 }
 
+export enum Equipment {
+  Rubber = 'Rubber',
+}
+
 export interface Exercise {
   type: ExerciseType
   name: string
@@ -13,4 +17,5 @@ export interface Exercise {
   duration: number
   needPair?: boolean
   switchInTheMiddle?: boolean
+  equipment?: Equipment
 }

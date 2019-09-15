@@ -1,7 +1,7 @@
-import { ThunkAction, Exercise } from 'types/'
+import { ThunkAction, Exercise, Equipment } from 'types/'
 import { setExercises, setRemainingTime } from './pure'
 import { pause, warmUpRest, exerciseRest, warmUpLegs, warmUpBody, warmUpArms, pullUps, pushUps, handStandPushUps, optionalExercisesPart1, optionalExercisesPart2, exerciseRoundRest, afterWorkout } from 'data/'
-
+import { getRandomBoolean } from 'majime'
 
 export const initWorkout = (): ThunkAction => (dispatch) => {
   let exercises: Exercise[] = []
@@ -19,8 +19,13 @@ export const initWorkout = (): ThunkAction => (dispatch) => {
   exercises = [pause(), warmUpRest, ...warmUp, pause('Warm up completed!')]
 
   // Workout
-  let optional1 = optionalExercisesPart1.randomElement()
-  let optional2 = optionalExercisesPart2.randomElement()
+  const pushUp = pushUps.randomElement()
+  const usedEqupment = pushUp.equipment != null ? [Equipment.Rubber] : []
+
+  const filterByEquipment = (exercise: Exercise) => exercise.equipment == null || !usedEqupment.includes(exercise.equipment)
+
+  let optional1 = optionalExercisesPart1.filter(filterByEquipment).randomElement()
+  let optional2 = optionalExercisesPart2.filter(filterByEquipment).randomElement()
   if (optional1.needPair) {
     optional2 = {
       ...optional1,
@@ -34,10 +39,26 @@ export const initWorkout = (): ThunkAction => (dispatch) => {
 
   const optionals = [optional1, optional2].shuffle()
 
+  let pullUp: Exercise
+  let handStandPushUp: Exercise
+  if (getRandomBoolean()) {
+    pullUp = pullUps.filter(filterByEquipment).randomElement()
+    if (pullUp.equipment != null) {
+      usedEqupment.push(pullUp.equipment)
+    }
+    handStandPushUp = handStandPushUps.filter(filterByEquipment).randomElement()
+  } else {
+    handStandPushUp = handStandPushUps.filter(filterByEquipment).randomElement()
+    if (handStandPushUp.equipment != null) {
+      usedEqupment.push(pullUp.equipment)
+    }
+    pullUp = pullUps.filter(filterByEquipment).randomElement()
+  }
+
   const workOut: Exercise[] = [
-    pullUps,
+    pullUp,
     pushUps.randomElement(),
-    handStandPushUps,
+    handStandPushUp,
   ]
     .shuffle()
     .map((exercise, index) => [

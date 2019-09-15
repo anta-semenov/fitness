@@ -1,4 +1,4 @@
-import { Exercise, ExerciseType } from 'types/'
+import { Exercise, ExerciseType, Equipment } from 'types/'
 
 const exerciseDuration = 40
 const exerciseRestDuration = 20
@@ -101,19 +101,76 @@ export const pushUps: Exercise[] = [
     name: 'Single leg push ups',
     description: 'Поочередно поднимаешь одну ногу'
   },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Push up with rubber',
+    description: 'Перебрасываешь резинку через плечи и зажимаешь ладонями',
+    equipment: Equipment.Rubber,
+  },
 ]
 
-export const pullUps: Exercise = {
-  type: ExerciseType.Exercise,
-  duration: exerciseDuration,
-  name: 'Pull ups',
-}
+export const pullUps: Exercise[] = [
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Pull ups',
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Narrow pull ups',
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Over head pull ups',
+    description: 'Заводишь за голову',
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Pull rubber down short',
+    description: 'Тянешь сложенную в двое резинку вниз сколько можешь (где-то до груди)',
+    equipment: Equipment.Rubber,
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Pull rubber down long',
+    description: 'Тянешь резинку вниз, нужно имитировать руками выход силой',
+    equipment: Equipment.Rubber,
+  },
+]
 
-export const handStandPushUps: Exercise = {
-  type: ExerciseType.Exercise,
-  duration: exerciseDuration,
-  name: 'Stand by hand push ups',
-}
+export const handStandPushUps: Exercise[] = [
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Stand by hand push ups',
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Pull rubber up from hips',
+    description: 'Зажимаешь резинку ногами, тянешь тругой конец сколько сможешь, цель провести через плечи',
+    equipment: Equipment.Rubber,
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Push rubber up front',
+    description: 'Закрепляешь резинку ногами, садишься так что бы другой конец был на уровне головы, растягиваешь резинку, поднимая руки вверх и имитируя отжимания в стойке на руках. Резинка перед собой',
+    equipment: Equipment.Rubber,
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Push rubber up back',
+    description: 'Закрепляешь резинку ногами, садишься так что бы другой конец был на уровне головы, растягиваешь резинку, поднимая руки вверх и имитируя отжимания в стойке на руках. Резинка за головой',
+    equipment: Equipment.Rubber,
+  }
+]
 
 export const optionalExercisesPart1: Exercise[] = [
   {
@@ -325,6 +382,12 @@ export const optionalExercisesPart2: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
+    name: 'Squats with rubber',
+    equipment: Equipment.Rubber,
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
     name: 'Narrow squats',
   },
   {
@@ -353,6 +416,13 @@ export const optionalExercisesPart2: Exercise[] = [
     duration: exerciseDuration,
     name: 'Plie squats',
     description: 'Приседания с широко расставленными ногами (на ширине борда)',
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Plie squats with rubber',
+    description: 'Приседания с широко расставленными ногами (на ширине борда) с резинкой',
+    equipment: Equipment.Rubber,
   },
   {
     type: ExerciseType.Exercise,

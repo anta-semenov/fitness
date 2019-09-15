@@ -24,7 +24,7 @@ const everySecond = (): ThunkAction => (dispatch, getState) => {
       dispatch(playSound(AudioEffect.Ready))
     } else if (remainingTime === 1) {
       dispatch(playSound(AudioEffect.Go))
-    } else if (remainingTime === 21 && activeExercise != null && activeExercise.switchInTheMiddle) {
+    } else if (remainingTime === 22 && activeExercise != null && activeExercise.switchInTheMiddle) {
       dispatch(playSound(AudioEffect.Attention))
     }
   } else if (getState().timerState === TimerState.Active && getState().remainingTime === 0) {
