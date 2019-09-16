@@ -6,7 +6,6 @@ import { loadPreviousExercises, saveTodaysExercises } from 'utils/'
 
 export const initWorkout = (): ThunkAction => async (dispatch) => {
   const previousExercises = await loadPreviousExercises()
-  console.log('++++', previousExercises)
   const previousExercisesNames = previousExercises.flatten().map((exercise) => exercise.name).unique()
   const filterPreviousExercises = (exercise: Exercise): boolean => !previousExercisesNames.includes(exercise.name)
 
