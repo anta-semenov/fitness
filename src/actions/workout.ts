@@ -6,8 +6,8 @@ import { loadPreviousExercises, saveTodaysExercises } from 'utils/'
 
 export const initWorkout = (): ThunkAction => async (dispatch) => {
   const previousExercises = await loadPreviousExercises()
-  const previousExercisesNames = previousExercises.flatten().map((exercise) => exercise.name).unique()
-  const filterPreviousExercises = (exercise: Exercise): boolean => !previousExercisesNames.includes(exercise.name)
+  const previousExercisesNames = new Set(previousExercises.flatten().map((exercise) => exercise.name))
+  const filterPreviousExercises = (exercise: Exercise): boolean => !previousExercisesNames.has(exercise.name)
 
   let exercises: Exercise[] = []
 
@@ -25,7 +25,7 @@ export const initWorkout = (): ThunkAction => async (dispatch) => {
 
   // Workout
   const pushUp = pushUps.filter(filterPreviousExercises).randomElement()
-  const usedEqupment = pushUp.equipment != null ? [Equipment.Rubber] : []
+  const usedEqupment = pushUp.equipment != null ? [pushUp.equipment] : []
 
   const filterByEquipment = (exercise: Exercise) => exercise.equipment == null || !usedEqupment.includes(exercise.equipment)
 
