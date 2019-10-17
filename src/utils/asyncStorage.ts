@@ -1,5 +1,5 @@
 import { AsyncStorage } from 'react-native'
-import { Exercise, ExerciseType } from 'types/'
+import { Exercise, ExerciseType, State } from 'types/'
 
 const previousExercisesKey = 'previousExercisesKey'
 
@@ -19,6 +19,28 @@ export const saveTodaysExercises = async (exercises: Exercise[]) => {
   const previousExercises = await loadPreviousExercises()
   try {
     AsyncStorage.setItem(previousExercisesKey, JSON.stringify([exercises.filter((exercise) => exercise.type === ExerciseType.Exercise), ...previousExercises.slice(0, 6)]))
+  } catch {
+    //
+  }
+}
+
+const stateKey = 'fitnessAppState'
+
+export const loadState = async (): Promise<State | undefined> => {
+  try {
+    const state = await AsyncStorage.getItem(stateKey)
+    if (stateKey == null) {
+      return undefined
+    }
+    return JSON.parse(state) as State
+  } catch {
+    return undefined
+  }
+}
+
+export const saveState = async (state: State): Promise<void> => {
+  try {
+    AsyncStorage.setItem(stateKey, JSON.stringify(state))
   } catch {
     //
   }

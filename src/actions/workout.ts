@@ -1,4 +1,4 @@
-import { ThunkAction, Exercise, Equipment } from 'types/'
+import { ThunkAction, Exercise } from 'types/'
 import { setExercises, setRemainingTime } from './pure'
 import { pause, warmUpRest, exerciseRest, warmUpLegs, warmUpBody, warmUpArms, pullUps, pushUps, handStandPushUps, optionalExercisesPart1, optionalExercisesPart2, exerciseRoundRest, afterWorkout } from 'data/'
 import { getRandomBoolean } from 'majime'
@@ -6,8 +6,9 @@ import { loadPreviousExercises, saveTodaysExercises } from 'utils/'
 
 export const initWorkout = (): ThunkAction => async (dispatch) => {
   const previousExercises = await loadPreviousExercises()
-  const previousExercisesNames = new Set(previousExercises.flatten().map((exercise) => exercise.name))
-  const filterPreviousExercises = (exercise: Exercise): boolean => !previousExercisesNames.has(exercise.name)
+  const previousExercisesNamesAll = new Set(previousExercises.flatten().map((exercise) => exercise.name))
+  const previousExercisesNames2Days = new Set(previousExercises.slice(0, 2).flatten().map((exercise) => exercise.name))
+  const filterPreviousExercises = (exercise: Exercise): boolean => !previousExercisesNamesAll.has(exercise.name)
 
   let exercises: Exercise[] = []
 
@@ -52,7 +53,7 @@ export const initWorkout = (): ThunkAction => async (dispatch) => {
   let pullUp: Exercise
   let handStandPushUp: Exercise
   if (getRandomBoolean()) {
-    pullUp = pullUps.filter(filterByEquipment).randomElement()
+    pullUp = pullUps.filter(filterByEquipment).filter((exercise) => !previousExercisesNames2Days.has(exercise.name)).randomElement()
     if (pullUp.equipment != null) {
       usedEqupment.push(pullUp.equipment)
     }
