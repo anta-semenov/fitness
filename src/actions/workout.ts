@@ -59,7 +59,7 @@ export const initWorkout = (): ThunkAction => async (dispatch) => {
     }
     handStandPushUp = handStandPushUps.filter(filterByEquipment).randomElement()
   } else {
-    handStandPushUp = handStandPushUps.filter(filterByEquipment).randomElement()
+    handStandPushUp = handStandPushUps.filter(filterByEquipment).filter((exercise) => !previousExercisesNames2Days.has(exercise.name)).randomElement()
     if (handStandPushUp.equipment != null) {
       usedEqupment.push(handStandPushUp.equipment)
     }

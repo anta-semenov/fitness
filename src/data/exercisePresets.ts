@@ -119,6 +119,15 @@ export const pullUps: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
+    name: 'Pull ups ',
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Pull ups  ', },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
     name: 'Narrow pull ups',
   },
   {
@@ -343,6 +352,11 @@ export const optionalExercisesPart2: Exercise[] = [
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
     name: 'Rockstars',
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Jumping jacks',
   },
   {
     type: ExerciseType.Exercise,
