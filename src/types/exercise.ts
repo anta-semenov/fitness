@@ -14,9 +14,11 @@ export enum Equipment {
 export interface Exercise {
   type: ExerciseType
   name: string
+  sort: number
   description?: string
   duration: number
   needPair?: boolean
   switchInTheMiddle?: boolean
   equipment?: Equipment
+  warmUpExercises: Exercise[] 
 }

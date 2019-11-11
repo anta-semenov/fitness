@@ -18,7 +18,7 @@ const previousExercisesKey = 'previousExercisesKey'
 export const saveTodaysExercises = async (exercises: Exercise[]) => {
   const previousExercises = await loadPreviousExercises()
   try {
-    AsyncStorage.setItem(previousExercisesKey, JSON.stringify([exercises.filter((exercise) => exercise.type === ExerciseType.Exercise), ...previousExercises.slice(0, 6)]))
+    AsyncStorage.setItem(previousExercisesKey, JSON.stringify([exercises.filter((exercise) => exercise.type === ExerciseType.Exercise), ...previousExercises.slice(0, 20)]))
   } catch {
     //
   }

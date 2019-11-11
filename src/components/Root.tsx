@@ -23,12 +23,10 @@ const loadStore = (): Store<State> | null => {
   const [store, setStore] = React.useState(null)
 
   React.useEffect(() => {
-    if (store == null) {
-      configureStore().then((newStore) => {
-        newStore.dispatch(initTimer() as any)
-        setStore(newStore)
-      })
-    }
-  }, [store])
+    configureStore().then((newStore) => {
+      newStore.dispatch(initTimer() as any)
+      setStore(newStore)
+    })
+  }, [])
   return store
 }
