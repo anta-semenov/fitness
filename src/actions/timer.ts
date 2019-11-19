@@ -51,6 +51,9 @@ export const nextExercise = (): ThunkAction => (dispatch, getState) => {
 export const startPauseTimer = (start?: boolean): ThunkAction => (dispatch, getState) => {
   if (start !== true && getState().timerState === TimerState.Active) {
     dispatch(setTimerState(TimerState.Pause))
+    if (getState().exercises[0].incrementTimeOnPause === true) {
+      dispatch(setRemainingTime(getState().remainingTime + 5))
+    }
     deactivateKeepAwake()
   } else {
     dispatch(setTimerState(TimerState.Active))

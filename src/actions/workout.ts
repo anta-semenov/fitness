@@ -1,12 +1,13 @@
 import { ThunkAction, Exercise } from 'types/'
 import { setExercises, setRemainingTime } from './pure'
-import { pause, warmUpRest, exerciseRest, warmUpLegs, warmUpBody, warmUpArms, pullUps, pushUps, handStandPushUps, optionalExercisesPart1, optionalExercisesPart2, exerciseRoundRest, afterWorkout } from 'data/'
+import { pause, warmUpRest, exerciseRest, warmUpLegs, warmUpBody, warmUpArms, pullUps, pushUps, handStandPushUps, optionalExercisesPart1, optionalExercisesPart2, exerciseRoundRest, afterWorkout, completion, muscularEndurance } from 'data/'
 import { getRandomBoolean } from 'majime'
 import { loadPreviousExercises, saveTodaysExercises } from 'utils/'
+import { Alert } from 'react-native'
 
 export const initWorkout = (): ThunkAction => async (dispatch) => {
   const previousExercises = await loadPreviousExercises()
-  const filterPreviousExercises = (numberOfFilterDays: number) => (exercise: Exercise): boolean => !previousExercises.flatten().slice(0, numberOfFilterDays).map((exercise) => exercise.name).includes(exercise.name)
+  const filterPreviousExercises = (numberOfFilterDays: number) => (exercise: Exercise): boolean => !previousExercises.slice(0, numberOfFilterDays).flatten().map((exercise) => exercise.name).includes(exercise.name)
 
   let exercises: Exercise[] = []
 
@@ -79,7 +80,10 @@ export const initWorkout = (): ThunkAction => async (dispatch) => {
     ].filterNull())
     .flatten()
 
-  exercises = [...exercises, warmUpRest, ...workOut, exerciseRoundRest, ...workOut, pause('Main workout completed!'), ...afterWorkout]
+  const enduranceExercise = muscularEndurance.filter(filterPreviousExercises(5))[0]
+  const enduranceBlock = enduranceExercise.duration !== 0 ? [warmUpRest, enduranceExercise] : [enduranceExercise]
+
+  exercises = [...exercises, warmUpRest, ...workOut, exerciseRoundRest, ...workOut, pause('Main workout completed!'), ...afterWorkout, ...enduranceBlock, completion]
 
   dispatch(setExercises(exercises))
   dispatch(setRemainingTime(exercises[0].duration))

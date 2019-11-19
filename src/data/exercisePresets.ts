@@ -826,44 +826,86 @@ export const afterWorkout: Exercise[] = [
   {
     type: ExerciseType.RequiredExercise,
     duration: 0,
-    name: 'Sit ups 40',
+    name: 'Sit ups 48',
     sort: 0,
     warmUpExercises: [],
   },
   {
     type: ExerciseType.RequiredExercise,
     duration: 0,
-    name: 'Beetle 20 with weightings',
+    name: 'Beetle 24 with weightings',
     sort: 0,
     warmUpExercises: [],
   },
   {
     type: ExerciseType.RequiredExercise,
     duration: 0,
-    name: 'Leg rises 20 with weightings',
+    name: 'Leg rises 24 with weightings',
     sort: 0,
     warmUpExercises: [],
   },
   {
     type: ExerciseType.RequiredExercise,
     duration: 0,
-    name: 'Knee tuck crunches 20 with weightings',
+    name: 'Knee tuck crunches 24 with weightings',
     sort: 0,
     warmUpExercises: [],
   },
-  warmUpRest,
+]
+
+export const completion: Exercise = {
+  type: ExerciseType.Done,
+  duration: 0,
+  name: 'Workout completed!',
+  sort: 0,
+  warmUpExercises: [],
+}
+
+export const muscularEndurance: Exercise[] = [
   {
-    type: ExerciseType.RequiredExercise,
-    duration: 50,
-    name: 'Boarder pulsing squats',
+    type: ExerciseType.Exercise,
+    duration: 120,
+    name: 'Boarder pulsing squats endurance 1',
     sort: 0,
     warmUpExercises: [],
+    incrementTimeOnPause: true
   },
   {
-    type: ExerciseType.Done,
+    type: ExerciseType.Exercise,
     duration: 0,
-    name: 'Workout completed!',
+    name: '20 pull ups',
     sort: 0,
     warmUpExercises: [],
-  }
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: 120,
+    name: 'Boarder pulsing squats endurance 2',
+    sort: 0,
+    warmUpExercises: [],
+    incrementTimeOnPause: true
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: 0,
+    name: '50 push ups',
+    sort: 0,
+    warmUpExercises: [],
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: 120,
+    name: 'Boarder pulsing squats endurance 3',
+    sort: 0,
+    warmUpExercises: [],
+    incrementTimeOnPause: true
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: 150,
+    name: 'Stand by hand endurance',
+    sort: 0,
+    warmUpExercises: [],
+    incrementTimeOnPause: true
+  },
 ]

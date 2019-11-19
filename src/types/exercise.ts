@@ -20,5 +20,6 @@ export interface Exercise {
   needPair?: boolean
   switchInTheMiddle?: boolean
   equipment?: Equipment
-  warmUpExercises: Exercise[] 
+  warmUpExercises: Exercise[]
+  incrementTimeOnPause?: boolean
 }
