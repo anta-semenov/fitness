@@ -135,15 +135,6 @@ export const pushUps: Exercise[] = [
     warmUpExercises: [],
     description: 'Поочередно поднимаешь одну ногу'
   },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
-    name: 'Push up with rubber',
-    sort: 0,
-    warmUpExercises: [],
-    description: 'Перебрасываешь резинку через плечи и зажимаешь ладонями',
-    equipment: Equipment.Rubber,
-  },
 ]
 
 export const pullUps: Exercise[] = [

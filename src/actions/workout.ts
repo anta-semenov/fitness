@@ -3,7 +3,6 @@ import { setExercises, setRemainingTime } from './pure'
 import { pause, warmUpRest, exerciseRest, warmUpLegs, warmUpBody, warmUpArms, pullUps, pushUps, handStandPushUps, optionalExercisesPart1, optionalExercisesPart2, exerciseRoundRest, afterWorkout, completion, muscularEndurance } from 'data/'
 import { getRandomBoolean } from 'majime'
 import { loadPreviousExercises, saveTodaysExercises } from 'utils/'
-import { Alert } from 'react-native'
 
 export const initWorkout = (): ThunkAction => async (dispatch) => {
   const previousExercises = await loadPreviousExercises()
@@ -63,7 +62,7 @@ export const initWorkout = (): ThunkAction => async (dispatch) => {
     if (handStandPushUp.equipment != null) {
       usedEqupment.push(handStandPushUp.equipment)
     }
-    pullUp = pullUps.filter(filterByEquipment).randomElement()
+    pullUp = pullUps.filter(filterByEquipment).filter(filterPreviousExercises(2)).randomElement()
   }
 
   const workOut: Exercise[] = [
