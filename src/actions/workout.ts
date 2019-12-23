@@ -6,7 +6,11 @@ import { loadPreviousExercises, saveTodaysExercises } from 'utils/'
 
 export const initWorkout = (): ThunkAction => async (dispatch) => {
   const previousExercises = await loadPreviousExercises()
-  const filterPreviousExercises = (numberOfFilterDays: number) => (exercise: Exercise): boolean => !previousExercises.slice(0, numberOfFilterDays).flatten().map((exercise) => exercise.name).includes(exercise.name)
+  const filterPreviousExercises = (numberOfFilterDays: number) => (exercise: Exercise): boolean => !previousExercises
+    .slice(0, numberOfFilterDays)
+    .flatten()
+    .map((exercise) => exercise.name.replace(/\sL$/g, ''))
+    .includes(exercise.name)
 
   let exercises: Exercise[] = []
 
