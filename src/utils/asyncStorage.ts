@@ -1,4 +1,4 @@
-import { AsyncStorage } from 'react-native'
+import { AsyncStorage, Alert } from 'react-native'
 import { Exercise, ExerciseType, State } from 'types/'
 
 const previousExercisesKey = 'previousExercisesKey'
@@ -18,9 +18,10 @@ const previousExercisesKey = 'previousExercisesKey'
 export const saveTodaysExercises = async (exercises: Exercise[]) => {
   const previousExercises = await loadPreviousExercises()
   try {
-    AsyncStorage.setItem(previousExercisesKey, JSON.stringify([exercises.filter((exercise) => exercise.type === ExerciseType.Exercise), ...previousExercises.slice(0, 20)]))
+    const newExercises = [exercises.filter((exercise) => exercise.type === ExerciseType.Exercise), ...previousExercises.slice(0, 20)]
+    AsyncStorage.setItem(previousExercisesKey, JSON.stringify(newExercises))
   } catch {
-    //
+    Alert.alert('Can\'t save previous exwrcises')
   }
 }
 
