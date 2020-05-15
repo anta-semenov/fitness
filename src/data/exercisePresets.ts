@@ -41,7 +41,21 @@ export const pushUps: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
-    name: 'Push ups',
+    name: 'Push ups on balans bar',
+    sort: 0,
+    warmUpExercises: [],
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Push ups on rings',
+    sort: 0,
+    warmUpExercises: [],
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Dips on rings',
     sort: 0,
     warmUpExercises: [],
   },
@@ -55,13 +69,6 @@ export const pushUps: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
-    name: 'Commander push ups',
-    sort: 0,
-    warmUpExercises: [],
-  },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
     name: 'Narror push ups',
     sort: 0,
     warmUpExercises: [],
@@ -69,21 +76,7 @@ export const pushUps: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
-    name: 'Side by side push ups',
-    sort: 0,
-    warmUpExercises: [],
-  },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
     name: 'Wide push ups',
-    sort: 0,
-    warmUpExercises: [],
-  },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
-    name: 'Side plank push ups',
     sort: 0,
     warmUpExercises: [],
   },
@@ -98,10 +91,18 @@ export const pushUps: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
-    name: 'Limb raise push ups',
+    name: 'Knee to elbow push ups',
     sort: 0,
     warmUpExercises: [],
-    description: 'В верхней фазе поднимаешь противоположные ногу и руку вверх и в сторону'
+    description: 'Подводишь колено к локтю с низу в нижней части'
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Plance lean push ups',
+    sort: 0,
+    warmUpExercises: [],
+    description: 'Выносишь плечи над ладонями'
   },
   {
     type: ExerciseType.Exercise,
@@ -114,26 +115,10 @@ export const pushUps: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
-    name: 'Push ups shoulder taps',
-    sort: 0,
-    warmUpExercises: [],
-    description: 'Касаешься плеча противоположной рукой в верхней фазе'
-  },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
     name: 'Typewriter push ups',
     sort: 0,
     warmUpExercises: [],
     description: 'Руки широко, при отжиманиях поочередно переносишь тело к одной из рук, в верхней фазе в центре'
-  },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
-    name: 'Single leg push ups',
-    sort: 0,
-    warmUpExercises: [],
-    description: 'Поочередно поднимаешь одну ногу'
   },
 ]
 
@@ -148,36 +133,14 @@ export const pullUps: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
-    name: 'Pull ups ',
+    name: 'Narrow bicepc pull ups',
     sort: 0,
     warmUpExercises: [],
   },
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
-    name: 'Pull ups  ',
-    sort: 0,
-    warmUpExercises: [],
-  },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
-    name: 'Narrow pull ups',
-    sort: 0,
-    warmUpExercises: [],
-  },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
-    name: 'Over head pull ups',
-    sort: 0,
-    warmUpExercises: [],
-    description: 'Заводишь за голову',
-  },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
-    name: 'Wide pull ups',
+    name: 'Chest pull ups',
     sort: 0,
     warmUpExercises: [],
   },
@@ -190,22 +153,13 @@ export const pullUps: Exercise[] = [
     description: 'Тянешь резинку вниз, нужно имитировать руками выход силой',
     equipment: Equipment.Rubber,
   },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
-    name: 'Pull rubber up with biceps',
-    sort: 0,
-    warmUpExercises: [],
-    description: 'Тянешь резинку вверх, с помощью бицепсов',
-    equipment: Equipment.Rubber,
-  },
 ]
 
 export const handStandPushUps: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
-    name: 'Stand by hand push ups',
+    name: 'Pike push ups',
     sort: 0,
     warmUpExercises: [],
   },
@@ -237,6 +191,8 @@ export const handStandPushUps: Exercise[] = [
     equipment: Equipment.Rubber,
   }
 ]
+
+export const squats: Exercise[] = []
 
 export const optionalExercisesPart1: Exercise[] = [
   {
