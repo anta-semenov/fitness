@@ -192,7 +192,86 @@ export const handStandPushUps: Exercise[] = [
   }
 ]
 
-export const squats: Exercise[] = []
+export const squats: Exercise[] = [
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Squats with rubber',
+    sort: 0,
+    warmUpExercises: [],
+    equipment: Equipment.Rubber,
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Narrow squats with rubber',
+    sort: 0,
+    warmUpExercises: [],
+    equipment: Equipment.Rubber,
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Squat to high knee',
+    sort: 0,
+    warmUpExercises: [],
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Pistol squats',
+    sort: 0,
+    warmUpExercises: [],
+    switchInTheMiddle: true,
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Plie squats with rubber',
+    sort: 0,
+    warmUpExercises: [],
+    description: 'Приседания с широко расставленными ногами (на ширине борда) с резинкой',
+    equipment: Equipment.Rubber,
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Backward lunges',
+    sort: 0,
+    warmUpExercises: [],
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Twist forward lunges',
+    sort: 0,
+    warmUpExercises: [],
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Touchdown lunges',
+    sort: 0,
+    warmUpExercises: [],
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Lunge to high knee',
+    sort: 0,
+    warmUpExercises: [],
+    switchInTheMiddle: true,
+  },
+  {
+    type: ExerciseType.Exercise,
+    duration: exerciseDuration,
+    name: 'Pendulum lunges',
+    sort: 0,
+    warmUpExercises: [],
+    description: 'Из заднего переходим сразу в передний',
+    switchInTheMiddle: true,
+  },
+]
 
 export const optionalExercisesPart1: Exercise[] = [
   {
