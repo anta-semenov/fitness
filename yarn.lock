@@ -3066,10 +3066,10 @@ lru-cache@^4.0.1:
     pseudomap "^1.0.2"
     yallist "^2.1.2"
 
-majime@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/majime/-/majime-4.1.0.tgz#7dae16733c2df998153db6fa4b0733eb635511c3"
-  integrity sha512-tIggaNF/YcWvLuqw5rkNuTvmci2LHumC7K4Pa0hDb6FbWxI5vjuFVy//7dbaeH99sFRTjuZXNFrV/aCG8UHOKA==
+majime@^4.4.0:
+  version "4.4.0"
+  resolved "https://registry.yarnpkg.com/majime/-/majime-4.4.0.tgz#f4aa9a01276954603ac075233d9e98b931d6ef9a"
+  integrity sha512-NDrLPx/sPb7M2Q7SlKSffpSqcvBwnyDrJU+tvp4VF59dqvvlNIrODlZ7W1Dbim+o7Dnj2RzyAYLm9Gn85vj9Gw==
 
 make-dir@^2.0.0:
   version "2.1.0"

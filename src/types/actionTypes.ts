@@ -4,4 +4,5 @@ export enum ActionType {
   SetExercises = 'SetExercises',
   SetTimerState = 'SetTimerState',
   SetWorkoutStage = 'SetWorkoutStage',
+  AddSetForExercise = 'AddSetForExercise',
 }

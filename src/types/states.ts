@@ -12,9 +12,14 @@ export enum TimerState {
   Pause = 'Pause',
 }
 
+export interface ExerciseStats {
+  [exerciseId: string]: { [date: number]: number[] }
+}
+
 export interface State {
   remainingTime: number
   exercises: Exercise[]
   timerState: TimerState
   workoutStage: WorkoutStage
+  exerciseStats: ExerciseStats
 }
