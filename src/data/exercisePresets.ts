@@ -133,13 +133,6 @@ export const pullUps: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
-    name: 'Narrow bicepc pull ups',
-    sort: 0,
-    warmUpExercises: [],
-  },
-  {
-    type: ExerciseType.Exercise,
-    duration: exerciseDuration,
     name: 'Chest pull ups',
     sort: 0,
     warmUpExercises: [],
@@ -147,11 +140,9 @@ export const pullUps: Exercise[] = [
   {
     type: ExerciseType.Exercise,
     duration: exerciseDuration,
-    name: 'Pull rubber down long',
+    name: 'Typewriter pull ups',
     sort: 0,
     warmUpExercises: [],
-    description: 'Тянешь резинку вниз, нужно имитировать руками выход силой',
-    equipment: Equipment.Rubber,
   },
 ]
 
