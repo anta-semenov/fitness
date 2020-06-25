@@ -1,4 +1,4 @@
-import { State, TimerState, WorkoutStage } from './states'
+import { State, TimerState, WorkoutStage, Workout } from './states'
 import { ActionType } from './actionTypes'
 import { SetterActionBase, ActionBase } from './actionBase'
 import { Exercise } from './exercise'
@@ -20,6 +20,7 @@ export type Action = TickTimerAction
 | SetTimerStateAction
 | SetWorkoutStageAction
 | AddSetForExerciseAction
+| SetWorkoutAction
 
 
 export interface TickTimerAction extends ActionBase<ActionType.TickTimer> {}
@@ -36,4 +37,9 @@ export interface AddSetForExerciseAction extends ActionBase<ActionType.AddSetFor
   date: number
   exerciseId: string
   numberOfRepetitions: number
+}
+
+export interface SetWorkoutAction extends ActionBase<ActionType.SetWorkout> {
+  id: number
+  workout: Workout
 }

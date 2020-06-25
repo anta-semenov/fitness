@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { State, Action, ActionType,TimerState, WorkoutStage, ExerciseStats } from 'types/'
+import { State, Action, ActionType,TimerState, WorkoutStage, ExerciseStats, Workout } from 'types/'
 import { setterActionReducer } from './utils'
 import { pause } from 'data/'
 
@@ -9,6 +9,7 @@ export const initialState: State = {
   timerState: TimerState.Pause,
   workoutStage: WorkoutStage.Idle,
   exerciseStats: {},
+  workouts: {},
 }
 
 const remainingTime = (prevState: number = initialState.remainingTime, action: Action): number => {
@@ -44,10 +45,22 @@ const addSetToExerciseStats = (prevStats: { [date: number]: number[] } = {}, dat
   }
 }
 
+const workouts = (prevState: { [id: number]: Workout } = initialState.workouts, action: Action): { [id: number]: Workout } => {
+  switch (action.type) {
+    case ActionType.SetWorkout:
+    return {
+      ...prevState,
+      [action.id]: action.workout,
+    }
+    default: return prevState
+  }
+}
+
 export const rootReducer = combineReducers({
   remainingTime,
   exercises,
   timerState,
   workoutStage,
   exerciseStats,
+  workouts,
 })

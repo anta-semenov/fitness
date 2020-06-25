@@ -20,6 +20,12 @@ export interface Exercise {
   needPair?: boolean
   switchInTheMiddle?: boolean
   equipment?: Equipment
-  warmUpExercises: Exercise[]
   incrementTimeOnPause?: boolean
+}
+
+export interface WorkoutExercise {
+  type: ExerciseType
+  name: string
+  description?: string
+  duration: number
 }
