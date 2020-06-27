@@ -13,6 +13,7 @@
     "@react-navigation/stack": "^5.5.1",
     "expo": "^34.0.0",
     "expo-av": "~6.0.0",
+    "expo-cli": "^3.21.13",
     "majime": "^4.4.0",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
@@ -32,7 +33,7 @@
     "@types/react-native": "^0.57.60",
     "@types/react-redux": "^7.0.9",
     "babel-preset-expo": "^5.1.1",
-    "typescript": "^3.4.5"
+    "typescript": "^3.7.5"
   },
   "private": true
 }

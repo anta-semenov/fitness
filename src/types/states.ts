@@ -19,7 +19,7 @@ export interface ExerciseStats {
 export interface Workout {
   id: number
   name: string
-  description: string
+  description?: string
   exercises: WorkoutExercise[]
 }
 
