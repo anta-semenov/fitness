@@ -1,20 +1,21 @@
 import * as React from 'react'
-import { View, ViewStyle, StyleSheet, Text, TouchableHighlight, TextStyle } from 'react-native'
+import { View, ViewStyle, StyleSheet, Text, TouchableOpacity, TextStyle, StyleProp } from 'react-native'
 
 interface Props {
   onPress: () => void
   title: string
   subtitle?: string
   id: number
+  style?: StyleProp<ViewStyle>
 }
 
 export const WorkoutListRow: React.StatelessComponent<Props> = (props): React.ReactElement => {
   return (
-    <TouchableHighlight onPress={ props.onPress }>
-      <View style={ [styles.container, props.id < 0 ? styles.centerAlign : undefined] }>
+    <TouchableOpacity onPress={ props.onPress }>
+      <View style={ [styles.container, props.id < 0 ? styles.centerAlign : undefined, props.style] }>
         <Text style={ styles.title }>{ props.title }</Text>
       </View>
-    </TouchableHighlight>
+    </TouchableOpacity>
 
   )
 }

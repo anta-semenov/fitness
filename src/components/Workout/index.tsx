@@ -25,11 +25,15 @@ const WorkoutComponent: React.StatelessComponent<Props> = (props): React.ReactEl
   const [isEditing, setIsEditing] = React.useState(props.route.params.isEditing)
   const [title, setTitle] = React.useState(props.workout.name)
   const [exercises, setExercises] = React.useState(props.workout.exercises)
+  const [defaultExerciseDuration, setDefaultExerciseDuration] = React.useState(props.workout.defaultExerciseDuration || 50)
+  const [defaultRestDuration, setDefaultRestDuration] = React.useState(props.workout.defaultRestDuration || 4)
 
   const save = () => props.save({
     ...props.workout,
     name: title,
     exercises,
+    defaultExerciseDuration,
+    defaultRestDuration,
   })
 
   React.useLayoutEffect(() => {
@@ -55,6 +59,10 @@ const WorkoutComponent: React.StatelessComponent<Props> = (props): React.ReactEl
         setTitle={ setTitle }
         exercises={ exercises }
         setExercises={ setExercises }
+        defaultExerciseDuration={ defaultExerciseDuration }
+        setDefaultExerciseDuration={ setDefaultExerciseDuration }
+        defaultRestDuration={ defaultRestDuration }
+        setDefaultRestDuration={ setDefaultRestDuration }
       />
     )
   } else {

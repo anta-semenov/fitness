@@ -24,7 +24,7 @@ type Props = WorkoutListProps & StateProps & DispatchProps
 const WorkoutListComponent: React.StatelessComponent<Props> = (props): React.ReactElement => {
   return (
     <FlatList
-      data={ [...props.workouts, { id: -1, name: '+ Add workout', exercises: [] }] }
+      data={ [...props.workouts, { id: -1, name: '+ Add workout', exercises: [] } as Workout] }
       renderItem={ ({ item }) => <WorkoutListRow title={ item.name } subtitle={ item.description } onPress={ () => props.onPress(item.id) } id={ item.id }/> }
       style={ styles.container }
       ItemSeparatorComponent={ () => <View style={ styles.separator }/> }
@@ -59,6 +59,8 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: WorkoutListProps): Dis
         id: newId,
         name: '',
         exercises: [],
+        defaultExerciseDuration: 50,
+        defaultRestDuration: 4,
       }))
       ownProps.navigation.navigate(Route.Workout, { workoutId: newId, isEditing: true })
     } else {

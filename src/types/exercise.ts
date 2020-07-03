@@ -7,6 +7,10 @@ export enum ExerciseType {
   Done = 'Done',
 }
 
+export namespace ExerciseType {
+  export const all: ExerciseType[] = Object.values(ExerciseType).filter((item) => typeof item === 'string') as ExerciseType[]
+}
+
 export enum Equipment {
   Rubber = 'Rubber',
 }
@@ -24,8 +28,9 @@ export interface Exercise {
 }
 
 export interface WorkoutExercise {
+  id: number
   type: ExerciseType
   name: string
   description?: string
-  duration: number
+  duration?: number
 }
