@@ -21,6 +21,7 @@ export type Action = TickTimerAction
 | SetWorkoutStageAction
 | AddSetForExerciseAction
 | SetWorkoutAction
+| RemoveWorkoutAction
 
 
 export interface TickTimerAction extends ActionBase<ActionType.TickTimer> {}
@@ -42,4 +43,8 @@ export interface AddSetForExerciseAction extends ActionBase<ActionType.AddSetFor
 export interface SetWorkoutAction extends ActionBase<ActionType.SetWorkout> {
   id: number
   workout: Workout
+}
+
+export interface RemoveWorkoutAction extends ActionBase<ActionType.RemoveWorkout> {
+  id: number
 }

@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { View, ViewStyle, StyleSheet, StyleProp, TextInput, TextStyle, LayoutAnimation } from 'react-native'
+import { View, ViewStyle, StyleSheet, StyleProp, TextInput, TextStyle, LayoutAnimation, Button } from 'react-native'
 import { WorkoutExercise, ExerciseType } from 'types/'
 import { PickerWithButton } from 'components/common/'
+import { range } from 'majime'
 
 interface WotkoutExerciseEditorProps {
   exercise: WorkoutExercise
@@ -40,6 +41,19 @@ export const WotkoutExerciseEditor: React.StatelessComponent<Props> = (props): R
           clearButtonMode='while-editing'
         />
       }
+      <PickerWithButton
+        title='Duration:'
+        selectedValue={ props.exercise.duration ?? 'Default duration' }
+        onSelect={ (value: 'Default duration' | number) => {
+          LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+          props.updateExercise({
+            ...props.exercise,
+            duration: value === 'Default duration' ? undefined : value,
+          })
+        } }
+        items={ ['Default duration', ...range(1, 9), ...range(2, 24).map((item) => item * 5)] }
+      />
+      <Button title='Delete' onPress={ props.removeExercise } color='#d72626'/>
     </View>
   )
 }

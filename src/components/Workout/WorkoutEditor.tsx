@@ -30,7 +30,10 @@ export const WorkoutEditor: React.StatelessComponent<Props> = (props): React.Rea
           <WotkoutExerciseEditor
             style={ styles.row }
             exercise={ item as WorkoutExercise }
-            removeExercise={ () => props.setExercises([...props.exercises.slice(0, index), ...props.exercises.slice(index + 1)]) }
+            removeExercise={ () => {
+              LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+              props.setExercises([...props.exercises.slice(0, index), ...props.exercises.slice(index + 1)])
+            } }
             updateExercise={ (value: WorkoutExercise) => props.setExercises([
               ...props.exercises.slice(0, index),
               value,
@@ -72,7 +75,7 @@ export const WorkoutEditor: React.StatelessComponent<Props> = (props): React.Rea
             } }
             title={ '+ Add exercise' }
             id={ -1 }
-            style={ styles.row }
+            style={ [styles.row, { alignItems: 'center' }] }
           />
         ) }
       />

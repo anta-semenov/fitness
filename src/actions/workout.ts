@@ -1,8 +1,9 @@
 import { ThunkAction, Exercise } from 'types/'
-import { setExercises, setRemainingTime } from './pure'
+import { setExercises, setRemainingTime, setWorkout } from './pure'
 import { pause, warmUpRest, exerciseRest, warmUpLegs, warmUpBody, warmUpArms, pullUps, pushUps, handStandPushUps, optionalExercisesPart1, optionalExercisesPart2, exerciseRoundRest, afterWorkout, completion, muscularEndurance } from 'data/'
 import { getRandomBoolean } from 'majime'
 import { loadPreviousExercises, saveTodaysExercises } from 'utils/'
+import { getWorkout } from 'selectors'
 
 export const initWorkout = (): ThunkAction => async (dispatch) => {
   const previousExercises = await loadPreviousExercises()
@@ -94,4 +95,14 @@ export const initWorkout = (): ThunkAction => async (dispatch) => {
   dispatch(setExercises(exercises))
   dispatch(setRemainingTime(exercises[0].duration))
   saveTodaysExercises(exercises)
+}
+
+export const copyWorkout = (idToCopy: number, newId: number): ThunkAction => (dispatch, getState) => {
+  const workoutToCopy = getWorkout(getState(), idToCopy)
+  const newWorkout = {
+    ...workoutToCopy,
+    id: newId,
+    name: `${workoutToCopy.name} copy`,
+  }
+  dispatch(setWorkout(newId, newWorkout))
 }

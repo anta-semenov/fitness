@@ -7,13 +7,14 @@ interface Props {
   subtitle?: string
   id: number
   style?: StyleProp<ViewStyle>
+  titleStyle?: StyleProp<TextStyle>
 }
 
 export const WorkoutListRow: React.StatelessComponent<Props> = (props): React.ReactElement => {
   return (
-    <TouchableOpacity onPress={ props.onPress }>
-      <View style={ [styles.container, props.id < 0 ? styles.centerAlign : undefined, props.style] }>
-        <Text style={ styles.title }>{ props.title }</Text>
+    <TouchableOpacity onPress={ props.onPress } activeOpacity={ 0.9 }>
+      <View style={ [styles.container, props.style] }>
+        <Text style={ [styles.title, props.titleStyle] }>{ props.title }</Text>
       </View>
     </TouchableOpacity>
 
@@ -28,7 +29,4 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 24,
   } as TextStyle,
-  centerAlign: {
-    alignItems: 'center'
-  } as ViewStyle,
 })
