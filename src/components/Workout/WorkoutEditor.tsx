@@ -39,6 +39,14 @@ export const WorkoutEditor: React.StatelessComponent<Props> = (props): React.Rea
               value,
               ...props.exercises.slice(index + 1),
             ]) }
+            addExerciseAfter={() => {
+              LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+              props.setExercises([
+                ...props.exercises.slice(0, index + 1),
+                { type: ExerciseType.Pause, name: '', id: Date.now() },
+                ...props.exercises.slice(index + 1),
+              ])
+            }}
           />
         ) }
         contentContainerStyle={ styles.listContent }
@@ -113,7 +121,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginHorizontal: 8,
     marginVertical: 4,
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 16,
     backgroundColor: '#ffffff',
   } as ViewStyle,
   listContent: {

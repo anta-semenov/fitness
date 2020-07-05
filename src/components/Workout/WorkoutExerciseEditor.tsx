@@ -8,6 +8,7 @@ interface WotkoutExerciseEditorProps {
   exercise: WorkoutExercise
   updateExercise: (newValue: WorkoutExercise) => void
   removeExercise: () => void
+  addExerciseAfter: () => void
   style?: StyleProp<ViewStyle>
 }
 
@@ -56,7 +57,10 @@ export const WotkoutExerciseEditor: React.StatelessComponent<Props> = (props): R
           items={ ['Default duration', ...range(1, 9), ...range(2, 24).map((item) => item * 5)] }
         />
       }
-      <Button title='Delete' onPress={ props.removeExercise } color='#d72626'/>
+      <View style={ styles.actionsContainer }>
+        <Button title='Delete' onPress={ props.removeExercise } color='#d72626'/>
+        <Button title='Add after' onPress={ props.addExerciseAfter }/>
+      </View>
     </View>
   )
 }
@@ -69,4 +73,14 @@ const styles = StyleSheet.create({
     fontSize: 20,
     paddingVertical: 8,
   } as TextStyle,
+  actionsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    borderTopColor: '#00000010',
+    borderTopWidth: 1,
+    alignSelf: 'stretch',
+    paddingVertical: 8,
+    marginTop: 8,
+    paddingHorizontal: 24,
+  } as ViewStyle,
 })
