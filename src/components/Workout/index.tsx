@@ -6,6 +6,7 @@ import { setWorkout } from 'actions/'
 import { getWorkout } from 'selectors/'
 import { StackScreenProps } from '@react-navigation/stack'
 import { WorkoutEditor } from './WorkoutEditor'
+import { WorkoutViewer } from './WorkoutViewer'
 
 interface WorkoutProps extends StackScreenProps<RouteParams, Route.Workout> {
 
@@ -67,9 +68,7 @@ const WorkoutComponent: React.StatelessComponent<Props> = (props): React.ReactEl
     )
   } else {
     return (
-      <View>
-
-      </View>
+      <WorkoutViewer workoutId={ props.workout.id } />
     )
   }
 }

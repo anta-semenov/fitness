@@ -41,18 +41,21 @@ export const WotkoutExerciseEditor: React.StatelessComponent<Props> = (props): R
           clearButtonMode='while-editing'
         />
       }
-      <PickerWithButton
-        title='Duration:'
-        selectedValue={ props.exercise.duration ?? 'Default duration' }
-        onSelect={ (value: 'Default duration' | number) => {
-          LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
-          props.updateExercise({
-            ...props.exercise,
-            duration: value === 'Default duration' ? undefined : value,
-          })
-        } }
-        items={ ['Default duration', ...range(1, 9), ...range(2, 24).map((item) => item * 5)] }
-      />
+      {
+        [ExerciseType.Done, ExerciseType.Pause].includes(props.exercise.type) ||
+        <PickerWithButton
+          title='Duration:'
+          selectedValue={ props.exercise.duration ?? 'Default duration' }
+          onSelect={ (value: 'Default duration' | number) => {
+            LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+            props.updateExercise({
+              ...props.exercise,
+              duration: value === 'Default duration' ? undefined : value,
+            })
+          } }
+          items={ ['Default duration', ...range(1, 9), ...range(2, 24).map((item) => item * 5)] }
+        />
+      }
       <Button title='Delete' onPress={ props.removeExercise } color='#d72626'/>
     </View>
   )

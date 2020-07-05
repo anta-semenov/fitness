@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, ViewStyle, StyleSheet, TextStyle, TouchableOpacity, Text } from 'react-native'
 import { connect } from 'react-redux'
 import { State, Dispatch, Workout, Route, RouteParams } from 'types/'
-import { setWorkout, removeWorkout, copyWorkout } from 'actions/'
+import { setWorkout, removeWorkout, copyWorkout, activateWorkout } from 'actions/'
 import { WorkoutListRow } from './WorkoutListRow'
 import { StackScreenProps } from '@react-navigation/stack/lib/typescript/src/types'
 import { getWorkouts } from 'selectors/'
@@ -109,7 +109,10 @@ const mapStateToProps = (state: State): StateProps => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: WorkoutListProps): DispatchProps => ({
-  onPress: (workoutId: number) => ownProps.navigation.navigate(Route.Workout, { workoutId, isEditing: false }),
+  onPress: (workoutId: number) => {
+    dispatch(activateWorkout(workoutId))
+    ownProps.navigation.navigate(Route.Workout, { workoutId, isEditing: false })
+  },
   addWorkout: () => {
     const newId = Date.now()
     dispatch(setWorkout(newId, {
@@ -119,12 +122,14 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: WorkoutListProps): Dis
       defaultExerciseDuration: 50,
       defaultRestDuration: 4,
     }))
+    dispatch(activateWorkout(newId))
     ownProps.navigation.navigate(Route.Workout, { workoutId: newId, isEditing: true })
   },
   deleteWorkout: (id: number) => dispatch(removeWorkout(id)),
   copyWorkout: (id: number) => {
     const newId = Date.now()
     dispatch(copyWorkout(id, newId))
+    dispatch(activateWorkout(newId))
     ownProps.navigation.navigate(Route.Workout, { workoutId: newId, isEditing: true })
   },
 })

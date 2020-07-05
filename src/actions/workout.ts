@@ -1,4 +1,4 @@
-import { ThunkAction, Exercise } from 'types/'
+import { ThunkAction, Exercise, WorkoutExercise, ExerciseType } from 'types/'
 import { setExercises, setRemainingTime, setWorkout } from './pure'
 import { pause, warmUpRest, exerciseRest, warmUpLegs, warmUpBody, warmUpArms, pullUps, pushUps, handStandPushUps, optionalExercisesPart1, optionalExercisesPart2, exerciseRoundRest, afterWorkout, completion, muscularEndurance } from 'data/'
 import { getRandomBoolean } from 'majime'
@@ -105,4 +105,15 @@ export const copyWorkout = (idToCopy: number, newId: number): ThunkAction => (di
     name: `${workoutToCopy.name} copy`,
   }
   dispatch(setWorkout(newId, newWorkout))
+}
+
+export const activateWorkout = (id: number): ThunkAction => (dispatch, getState) => {
+  const workout = getWorkout(getState(), id)
+  const exercises = workout.exercises.map((exercise) => WorkoutExercise.workoutExerciseToExercise(
+    exercise,
+    exercise.type === ExerciseType.Exercise ? workout.defaultExerciseDuration : workout.defaultRestDuration,
+  ))
+
+  dispatch(setExercises(exercises))
+  dispatch(setRemainingTime(exercises[0]?.duration ?? 0))
 }

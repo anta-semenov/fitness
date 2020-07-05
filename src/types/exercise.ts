@@ -25,6 +25,7 @@ export interface Exercise {
   switchInTheMiddle?: boolean
   equipment?: Equipment
   incrementTimeOnPause?: boolean
+  id?: number
 }
 
 export interface WorkoutExercise {
@@ -33,4 +34,12 @@ export interface WorkoutExercise {
   name: string
   description?: string
   duration?: number
+}
+
+export namespace WorkoutExercise {
+  export const workoutExerciseToExercise = (workoutExercise: WorkoutExercise, defaultDuration: number): Exercise => ({
+    ...workoutExercise,
+    duration: workoutExercise.duration ?? defaultDuration,
+    sort: 0,
+  })
 }
