@@ -28,6 +28,7 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
   const currentExerciseType = props.exercises[0]?.type ?? ExerciseType.Pause
   const isWorkoutPused = currentExerciseType === ExerciseType.Pause
   const title = currentExerciseType === ExerciseType.Exercise ? props.exercises[0]?.name : currentExerciseType
+  const firstExerciseIndex = props.exercises.findIndex((item) => item.type === ExerciseType.Exercise)
   return (
     <View style={ styles.container }>
       <View style={ styles.header }>
@@ -50,13 +51,20 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
         }
       </View>
       <FlatList
-        data={ props.exercises.slice(1).filter((item) => item.type === ExerciseType.Exercise) }
-        renderItem={ ({ item }) => (
-          <View style={ styles.exerciseTile }>
-            <Text style={ styles.title }>{ item.name }</Text>
-          </View>
-        ) }
+        data={ props.exercises.slice(firstExerciseIndex) }
+        renderItem={ ({ item, index }) => {
+          if (item.type === ExerciseType.Exercise) {
+            return (
+              <View style={ [styles.exerciseTile, index === 0 && { backgroundColor: '#00000010' }] }>
+                <Text style={ styles.title }>{ item.name }</Text>
+              </View>
+            )
+          } else {
+            return <View style={ [styles.separator, { backgroundColor: item.type === ExerciseType.Pause ? Colors.navy : Colors.green }] }/>
+          }
+        } }
         keyExtractor={ (item) => `${item.id}` }
+        contentContainerStyle={ styles.listContent }
       />
     </View>
   )
@@ -95,7 +103,16 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: Colors.black,
     marginBottom: 16,
-  }
+  },
+  separator: {
+    marginHorizontal: 8,
+    marginVertical: 4,
+    height: 4,
+    borderRadius: 2,
+  } as ViewStyle,
+  listContent: {
+    paddingVertical: 4,
+  } as ViewStyle,
 })
 
 const getColorForExerciseType = (type: ExerciseType): string => {
