@@ -56,6 +56,7 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
             <Text style={ styles.title }>{ item.name }</Text>
           </View>
         ) }
+        keyExtractor={ (item) => `${item.id}` }
       />
     </View>
   )
