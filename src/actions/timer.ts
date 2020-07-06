@@ -41,7 +41,7 @@ export const nextExercise = (): ThunkAction => (dispatch, getState) => {
     const newExercises = state.exercises.slice(1)
     dispatch(setExercises(newExercises))
     dispatch(setRemainingTime(newExercises[0].duration))
-    if (newExercises[0].type !== ExerciseType.Pause && newExercises[0].type !== ExerciseType.Done && newExercises[0].duration !== 0) {
+    if (newExercises[0].type !== ExerciseType.Pause && newExercises[0].type !== ExerciseType.Done && newExercises[0].type !== ExerciseType.Start && newExercises[0].duration !== 0) {
       dispatch(setTimerState(TimerState.Active))
       activateKeepAwake()
     }

@@ -4,6 +4,7 @@ export enum ExerciseType {
   RequiredExercise = 'RequiredExercise',
   Rest = 'Rest',
   Pause = 'Pause',
+  Start = 'Start',
   Done = 'Done',
 }
 

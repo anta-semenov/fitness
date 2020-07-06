@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, ViewStyle, StyleSheet, FlatList, Text, TextStyle } from 'react-native'
 import { connect } from 'react-redux'
 import { State, Dispatch, WorkoutExercise, TimerState, ExerciseType } from 'types/'
-import { startPauseTimer, nextExercise } from 'actions/'
+import { startPauseTimer, nextExercise, activateWorkout } from 'actions/'
 import { getWorkout } from 'selectors/'
 import { RoundButton } from 'components/common'
 import { Colors } from 'constants/'
@@ -20,13 +20,13 @@ interface StateProps {
 interface DispatchProps {
   startPauseTimer: () => void
   nextExercise: () => void
+  repeat: () => void
 }
 
 type Props = WorkoutViewerProps & StateProps & DispatchProps
 
 const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.ReactElement => {
   const currentExerciseType = props.exercises[0]?.type ?? ExerciseType.Pause
-  const isWorkoutPused = currentExerciseType === ExerciseType.Pause
   const title = currentExerciseType === ExerciseType.Exercise ? props.exercises[0]?.name : currentExerciseType
   const firstExerciseIndex = props.exercises.findIndex((item) => item.type === ExerciseType.Exercise)
   return (
@@ -34,7 +34,7 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
       <View style={ styles.header }>
         <Text style={ styles.activeTitle }>{ title ?? '' }</Text>
         {
-          isWorkoutPused ||
+          currentExerciseType === ExerciseType.Pause ||
           <Text style={ [styles.timer, { color: getColorForExerciseType(currentExerciseType) }] }>{ props.remainingTime }</Text>
         }
         {
@@ -42,11 +42,19 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
           <RoundButton onPress={ props.startPauseTimer } title='Pause' color={ Colors.navy }/>
         }
         {
-          isWorkoutPused && !props.isTimerActive &&
+          currentExerciseType === ExerciseType.Pause && !props.isTimerActive &&
           <RoundButton onPress={ props.nextExercise } title='Start' color={ Colors.navy }/>
         }
         {
-          !isWorkoutPused && !props.isTimerActive &&
+          currentExerciseType === ExerciseType.Start && !props.isTimerActive &&
+          <RoundButton onPress={ props.startPauseTimer } title='Start'/>
+        }
+        {
+          currentExerciseType === ExerciseType.Done && !props.isTimerActive &&
+          <RoundButton onPress={ props.repeat } title='Restart' color={ Colors.red }/>
+        }
+        {
+           ![ExerciseType.Start, ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) && !props.isTimerActive &&
           <RoundButton onPress={ props.startPauseTimer } title='Resume'/>
         }
       </View>
@@ -60,7 +68,7 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
               </View>
             )
           } else {
-            return <View style={ [styles.separator, { backgroundColor: item.type === ExerciseType.Pause ? Colors.navy : Colors.green }] }/>
+            return <View style={ [styles.separator, { backgroundColor: item.type === ExerciseType.Rest ? Colors.navy : Colors.green }] }/>
           }
         } }
         keyExtractor={ (item) => `${item.id}` }
@@ -138,9 +146,10 @@ const mapStateToProps = (state: State, ownProps: WorkoutViewerProps): StateProps
   }
 }
 
-const mapDispatchToProps = (dispatch: Dispatch): DispatchProps => ({
+const mapDispatchToProps = (dispatch: Dispatch, ownProps: WorkoutViewerProps): DispatchProps => ({
   startPauseTimer: () => dispatch(startPauseTimer()),
   nextExercise: () => dispatch(nextExercise()),
+  repeat: () => dispatch(activateWorkout(ownProps.workoutId))
 })
 
 export const WorkoutViewer = connect(mapStateToProps, mapDispatchToProps)(WorkoutViewerComponent)

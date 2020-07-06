@@ -30,7 +30,7 @@ export const WotkoutExerciseEditor: React.StatelessComponent<Props> = (props): R
         items={ ExerciseType.all }
       />
       {
-        [ExerciseType.Done, ExerciseType.Pause, ExerciseType.Rest].includes(props.exercise.type) ||
+        [ExerciseType.Done, ExerciseType.Pause, ExerciseType.Rest, ExerciseType.Start].includes(props.exercise.type) ||
         <TextInput
           style={ styles.title }
           value={ props.exercise.name }
