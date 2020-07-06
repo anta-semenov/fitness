@@ -34,7 +34,7 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
       <View style={ styles.header }>
         <Text style={ styles.activeTitle }>{ title ?? '' }</Text>
         {
-          currentExerciseType === ExerciseType.Pause ||
+          [ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) ||
           <Text style={ [styles.timer, { color: getColorForExerciseType(currentExerciseType) }] }>{ props.remainingTime }</Text>
         }
         {
