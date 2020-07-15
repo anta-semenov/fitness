@@ -2,7 +2,7 @@ import * as React from 'react'
 import { View, ViewStyle, StyleSheet, FlatList, Text, TextStyle } from 'react-native'
 import { connect } from 'react-redux'
 import { State, Dispatch, WorkoutExercise, TimerState, ExerciseType } from 'types/'
-import { startPauseTimer, nextExercise, activateWorkout } from 'actions/'
+import { startPauseTimer, nextExercise, activateWorkout, logStartOfTheWorkout } from 'actions/'
 import { getWorkout } from 'selectors/'
 import { RoundButton } from 'components/common'
 import { Colors } from 'constants/'
@@ -147,7 +147,10 @@ const mapStateToProps = (state: State, ownProps: WorkoutViewerProps): StateProps
 }
 
 const mapDispatchToProps = (dispatch: Dispatch, ownProps: WorkoutViewerProps): DispatchProps => ({
-  startPauseTimer: () => dispatch(startPauseTimer()),
+  startPauseTimer: () => {
+    dispatch(startPauseTimer())
+    dispatch(logStartOfTheWorkout(ownProps.workoutId))
+  },
   nextExercise: () => dispatch(nextExercise()),
   repeat: () => dispatch(activateWorkout(ownProps.workoutId))
 })

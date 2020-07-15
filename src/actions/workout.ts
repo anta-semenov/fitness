@@ -1,9 +1,9 @@
-import { ThunkAction, Exercise, WorkoutExercise, ExerciseType } from 'types/'
-import { setExercises, setRemainingTime, setWorkout } from './pure'
+import { ThunkAction, Exercise, WorkoutExercise, ExerciseType, WorkoutHistoryType } from 'types/'
+import { setExercises, setRemainingTime, setWorkout, addHistoryEvent, setActiveWorkoutId } from './pure'
 import { pause, warmUpRest, exerciseRest, warmUpLegs, warmUpBody, warmUpArms, pullUps, pushUps, handStandPushUps, optionalExercisesPart1, optionalExercisesPart2, exerciseRoundRest, afterWorkout, completion, muscularEndurance } from 'data/'
 import { getRandomBoolean } from 'majime'
 import { loadPreviousExercises, saveTodaysExercises } from 'utils/'
-import { getWorkout } from 'selectors'
+import { getWorkout, isBeginningOfWorkout, getActiveWorkout } from 'selectors'
 
 export const initWorkout = (): ThunkAction => async (dispatch) => {
   const previousExercises = await loadPreviousExercises()
@@ -109,6 +109,9 @@ export const copyWorkout = (idToCopy: number, newId: number): ThunkAction => (di
 
 export const activateWorkout = (id: number): ThunkAction => (dispatch, getState) => {
   const workout = getWorkout(getState(), id)
+  if (workout == null) {
+    return
+  }
   const exercises = workout.exercises.map((exercise) => WorkoutExercise.workoutExerciseToExercise(
     exercise,
     exercise.type === ExerciseType.Exercise ? workout.defaultExerciseDuration : workout.defaultRestDuration,
@@ -116,4 +119,34 @@ export const activateWorkout = (id: number): ThunkAction => (dispatch, getState)
 
   dispatch(setExercises(exercises))
   dispatch(setRemainingTime(exercises[0]?.duration ?? 0))
+  dispatch(setActiveWorkoutId(id))
+}
+
+export const logStartOfTheWorkout = (workoutId: number): ThunkAction => (dispatch, getState) => {
+  if (isBeginningOfWorkout(getState(), workoutId)) {
+    const workout = getWorkout(getState(), workoutId)
+    if (workout == null) {
+      return
+    }
+    dispatch(addHistoryEvent({
+      type: WorkoutHistoryType.Start,
+      id: workout.id,
+      name: workout.name,
+      date: Date.now(),
+    }))
+  }
+}
+
+export const logEndOfTheWorkout = (): ThunkAction => (dispatch, getState) => {
+  const workout = getActiveWorkout(getState())
+  if (workout == null) {
+    return
+  }
+
+  dispatch(addHistoryEvent({
+    type: WorkoutHistoryType.End,
+    id: workout.id,
+    name: workout.name,
+    date: Date.now(),
+  }))
 }

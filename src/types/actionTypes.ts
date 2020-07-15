@@ -7,4 +7,6 @@ export enum ActionType {
   AddSetForExercise = 'AddSetForExercise',
   SetWorkout = 'SetWorkout',
   RemoveWorkout = 'RemoveWorkout',
+  AddWorkoutHistory = 'AddWorkoutHistory',
+  SetActiveWorkoutId = 'SetActiveWorkoutId',
 }

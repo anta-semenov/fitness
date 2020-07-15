@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { State, Action, ActionType,TimerState, WorkoutStage, ExerciseStats, Workout } from 'types/'
+import { State, Action, ActionType,TimerState, WorkoutStage, ExerciseStats, Workout, WorkoutHistoryItem } from 'types/'
 import { setterActionReducer } from './utils'
 import { pause } from 'data/'
 import { omit } from 'majime'
@@ -11,6 +11,8 @@ export const initialState: State = {
   workoutStage: WorkoutStage.Idle,
   exerciseStats: {},
   workouts: {},
+  workoutHistory: [],
+  activeWorkoutId: 0,
 }
 
 const remainingTime = (prevState: number = initialState.remainingTime, action: Action): number => {
@@ -59,6 +61,16 @@ const workouts = (prevState: { [id: number]: Workout } = initialState.workouts, 
   }
 }
 
+const workoutHistory = (prevState: WorkoutHistoryItem[] = initialState.workoutHistory, action: Action): WorkoutHistoryItem[] => {
+  switch (action.type) {
+    case ActionType.AddWorkoutHistory:
+      return [action.historyItem, ...prevState]
+    default: return prevState
+  }
+}
+
+const activeWorkoutId = setterActionReducer(ActionType.SetActiveWorkoutId, initialState.activeWorkoutId)
+
 export const rootReducer = combineReducers({
   remainingTime,
   exercises,
@@ -66,4 +78,6 @@ export const rootReducer = combineReducers({
   workoutStage,
   exerciseStats,
   workouts,
+  workoutHistory,
+  activeWorkoutId,
 })

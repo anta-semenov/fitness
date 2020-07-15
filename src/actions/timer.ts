@@ -2,6 +2,7 @@ import { TimerState, ThunkAction, AudioEffect, ExerciseType } from 'types/'
 import { playSound } from './audio'
 import { tickTimer, setRemainingTime, setTimerState, setExercises } from './pure'
 import { activateKeepAwake, deactivateKeepAwake } from 'expo-keep-awake'
+import { logEndOfTheWorkout } from './workout'
 
 let interval
 
@@ -44,6 +45,9 @@ export const nextExercise = (): ThunkAction => (dispatch, getState) => {
     if (newExercises[0].type !== ExerciseType.Pause && newExercises[0].type !== ExerciseType.Done && newExercises[0].type !== ExerciseType.Start && newExercises[0].duration !== 0) {
       dispatch(setTimerState(TimerState.Active))
       activateKeepAwake()
+    }
+    if (newExercises[0].type === ExerciseType.Done) {
+      dispatch(logEndOfTheWorkout())
     }
   }
 }
