@@ -34,7 +34,11 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
       <View style={ styles.header }>
         <Text style={ styles.activeTitle }>{ title ?? '' }</Text>
         {
-          [ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) ||
+          props.exercises[0]?.description != null &&
+          <Text style={ styles.activeDuration }>{ props.exercises[0]?.description }</Text>
+        }
+        {
+          ([ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) || props.exercises[0].duration === 0) ||
           <Text style={ [styles.timer, { color: getColorForExerciseType(currentExerciseType) }] }>{ props.remainingTime }</Text>
         }
         {
@@ -54,7 +58,11 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
           <RoundButton onPress={ props.repeat } title='Restart' color={ Colors.red }/>
         }
         {
-           ![ExerciseType.Start, ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) && !props.isTimerActive &&
+          ![ExerciseType.Start, ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) && !props.isTimerActive && props.exercises[0].duration === 0 &&
+          <RoundButton onPress={ props.nextExercise } title='Next'/>
+        }
+        {
+           ![ExerciseType.Start, ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) && !props.isTimerActive && props.exercises[0].duration !== 0 &&
           <RoundButton onPress={ props.startPauseTimer } title='Resume'/>
         }
       </View>
@@ -120,7 +128,14 @@ const styles = StyleSheet.create({
     fontSize: 32,
     color: Colors.black,
     marginBottom: 16,
-  },
+  } as TextStyle,
+  activeDuration: {
+    fontSize: 20,
+    color: Colors.black,
+    marginBottom: 16,
+    opacity: 0.8,
+    textAlign: 'center',
+  } as TextStyle,
   separator: {
     marginHorizontal: 8,
     marginVertical: 4,

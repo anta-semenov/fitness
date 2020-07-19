@@ -40,7 +40,7 @@ export interface WorkoutExercise {
 export namespace WorkoutExercise {
   export const workoutExerciseToExercise = (workoutExercise: WorkoutExercise, defaultDuration: number): Exercise => ({
     ...workoutExercise,
-    duration: workoutExercise.duration ?? defaultDuration,
+    duration: workoutExercise.duration != null ? workoutExercise.duration : defaultDuration,
     sort: 0,
   })
 }
