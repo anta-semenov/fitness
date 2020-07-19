@@ -31,16 +31,31 @@ export const WotkoutExerciseEditor: React.StatelessComponent<Props> = (props): R
       />
       {
         [ExerciseType.Done, ExerciseType.Pause, ExerciseType.Rest, ExerciseType.Start].includes(props.exercise.type) ||
-        <TextInput
-          style={ styles.title }
-          value={ props.exercise.name }
-          onChangeText={ (value) => props.updateExercise({
-            ...props.exercise,
-            name: value,
-          }) }
-          placeholder='Name'
-          clearButtonMode='while-editing'
-        />
+        <>
+          <TextInput
+            style={ styles.title }
+            value={ props.exercise.name }
+            onChangeText={ (value) => props.updateExercise({
+              ...props.exercise,
+              name: value,
+            }) }
+            placeholder='Name'
+            clearButtonMode='while-editing'
+          />
+          <View style={ styles.separator }/>
+          <TextInput
+            style={ styles.description }
+            value={ props.exercise.description }
+            onChangeText={ (value) => props.updateExercise({
+              ...props.exercise,
+              description: value,
+            }) }
+            multiline={ true }
+            numberOfLines={ 3 }
+            placeholder='Description?'
+            clearButtonMode='while-editing'
+          />
+        </>
       }
       {
         [ExerciseType.Done, ExerciseType.Pause].includes(props.exercise.type) ||
@@ -54,7 +69,7 @@ export const WotkoutExerciseEditor: React.StatelessComponent<Props> = (props): R
               duration: value === 'Default duration' ? undefined : value,
             })
           } }
-          items={ ['Default duration', ...range(1, 9), ...range(2, 24).map((item) => item * 5)] }
+          items={ ['Default duration', ...range(0, 9), ...range(2, 24).map((item) => item * 5)] }
         />
       }
       <View style={ styles.actionsContainer }>
@@ -82,5 +97,15 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     marginTop: 8,
     paddingHorizontal: 24,
+  } as ViewStyle,
+  description: {
+    fontSize: 17,
+    paddingVertical: 8,
+  } as TextStyle,
+  separator: {
+    alignSelf: 'stretch',
+    backgroundColor: '#000000',
+    opacity: 0.1,
+    height: 1,
   } as ViewStyle,
 })

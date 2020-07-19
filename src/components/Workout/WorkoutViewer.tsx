@@ -65,6 +65,10 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
             return (
               <View style={ [styles.exerciseTile, index === 0 && { backgroundColor: '#00000010' }] }>
                 <Text style={ styles.title }>{ item.name }</Text>
+                {
+                  item.description &&
+                  <Text style={ styles.description }>{ item.description }</Text>
+                }
               </View>
             )
           } else {
@@ -106,6 +110,11 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   title: {
     fontSize: 24,
+  } as TextStyle,
+  description: {
+    fontSize: 17,
+    marginTop: 8,
+    opacity: 0.8,
   } as TextStyle,
   activeTitle: {
     fontSize: 32,

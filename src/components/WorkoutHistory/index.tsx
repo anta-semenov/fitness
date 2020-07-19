@@ -26,6 +26,7 @@ const WorkoutHistoryComponent: React.StatelessComponent<Props> = (props): React.
       renderItem={ ({ item }) => <HistoryItem item={ item }/> }
       contentContainerStyle={ styles.content }
       style={ styles.container }
+      keyExtractor={ (item) => `${item.id}` }
     />
   )
 }
