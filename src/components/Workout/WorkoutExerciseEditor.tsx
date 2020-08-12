@@ -69,7 +69,7 @@ export const WotkoutExerciseEditor: React.StatelessComponent<Props> = (props): R
               duration: value === 'Default duration' ? undefined : value,
             })
           } }
-          items={ ['Default duration', ...range(0, 9), ...range(2, 24).map((item) => item * 5)] }
+          items={ ['Default duration', ...range(0, 9), ...range(2, 24).map((item) => item * 5), ...range(13, 30).map((item) => item * 10)] }
         />
       }
       <View style={ styles.actionsContainer }>
