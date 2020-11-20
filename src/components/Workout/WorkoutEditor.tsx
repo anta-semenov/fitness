@@ -43,7 +43,7 @@ export const WorkoutEditor: React.StatelessComponent<Props> = (props): React.Rea
               LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
               props.setExercises([
                 ...props.exercises.slice(0, index + 1),
-                { type: ExerciseType.Pause, name: '', id: Date.now() },
+                { ...props.exercises[index], id: Date.now() },
                 ...props.exercises.slice(index + 1),
               ])
             }}

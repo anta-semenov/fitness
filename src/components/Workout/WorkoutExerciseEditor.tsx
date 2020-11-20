@@ -74,7 +74,7 @@ export const WotkoutExerciseEditor: React.StatelessComponent<Props> = (props): R
       }
       <View style={ styles.actionsContainer }>
         <Button title='Delete' onPress={ props.removeExercise } color='#d72626'/>
-        <Button title='Add after' onPress={ props.addExerciseAfter }/>
+        <Button title='Copy' onPress={ props.addExerciseAfter }/>
       </View>
     </View>
   )

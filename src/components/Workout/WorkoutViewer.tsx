@@ -41,30 +41,32 @@ const WorkoutViewerComponent: React.StatelessComponent<Props> = (props): React.R
           ([ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) || props.exercises[0].duration === 0) ||
           <Text style={ [styles.timer, { color: getColorForExerciseType(currentExerciseType) }] }>{ props.remainingTime }</Text>
         }
-        {
-          props.isTimerActive &&
-          <RoundButton onPress={ props.startPauseTimer } title='Pause' color={ Colors.navy }/>
-        }
-        {
-          currentExerciseType === ExerciseType.Pause && !props.isTimerActive &&
-          <RoundButton onPress={ props.nextExercise } title='Start' color={ Colors.navy }/>
-        }
-        {
-          currentExerciseType === ExerciseType.Start && !props.isTimerActive &&
-          <RoundButton onPress={ props.startPauseTimer } title='Start'/>
-        }
-        {
-          currentExerciseType === ExerciseType.Done && !props.isTimerActive &&
-          <RoundButton onPress={ props.repeat } title='Restart' color={ Colors.red }/>
-        }
-        {
-          ![ExerciseType.Start, ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) && !props.isTimerActive && props.exercises[0].duration === 0 &&
-          <RoundButton onPress={ props.nextExercise } title='Next'/>
-        }
-        {
-           ![ExerciseType.Start, ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) && !props.isTimerActive && props.exercises[0].duration !== 0 &&
-          <RoundButton onPress={ props.startPauseTimer } title='Resume'/>
-        }
+        <View style={ styles.buttonContainer }>
+          {
+            props.isTimerActive &&
+            <RoundButton onPress={ props.startPauseTimer } title='Pause' color={ Colors.navy }/>
+          }
+          {
+            currentExerciseType === ExerciseType.Pause && !props.isTimerActive &&
+            <RoundButton onPress={ props.nextExercise } title='Start' color={ Colors.navy }/>
+          }
+          {
+            currentExerciseType === ExerciseType.Start && !props.isTimerActive &&
+            <RoundButton onPress={ props.startPauseTimer } title='Start'/>
+          }
+          {
+            currentExerciseType === ExerciseType.Done && !props.isTimerActive &&
+            <RoundButton onPress={ props.repeat } title='Restart' color={ Colors.red }/>
+          }
+          {
+             ![ExerciseType.Start, ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) && !props.isTimerActive && props.exercises[0].duration !== 0 &&
+            <RoundButton onPress={ props.startPauseTimer } title='Resume'/>
+          }
+          {
+            ![ExerciseType.Start, ExerciseType.Pause, ExerciseType.Done].includes(currentExerciseType) && !props.isTimerActive &&
+            <RoundButton onPress={ props.nextExercise } title='Next' color={ Colors.navy }/>
+          }
+        </View>
       </View>
       <FlatList
         data={ props.exercises.slice(firstExerciseIndex) }
@@ -144,6 +146,9 @@ const styles = StyleSheet.create({
   } as ViewStyle,
   listContent: {
     paddingVertical: 4,
+  } as ViewStyle,
+  buttonContainer: {
+    flexDirection: 'row',
   } as ViewStyle,
 })
 

@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 50,
+    marginHorizontal: 8,
   } as ViewStyle,
   title: {
     fontSize: 22,
