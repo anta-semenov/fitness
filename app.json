@@ -17,12 +17,22 @@
       "backgroundColor": "#ffffff"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/0f032b60-8ffb-11e9-8d09-570d362ea7ac"
     },
     "assetBundlePatterns": [],
     "ios": {
       "supportsTablet": true
     },
-    "description": ""
+    "description": "",
+    "extra": {
+      "eas": {
+        "projectId": "0f032b60-8ffb-11e9-8d09-570d362ea7ac"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
+    },
+    "android": {}
   }
 }
