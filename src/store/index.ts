@@ -13,7 +13,7 @@ export const configureStore = async (): Promise<Store<State>> => {
     ? initialState
     : { ...initialState, ...loadedState }
 
-  if (Object.keys(state.workouts).length === 0 ||  true) {
+  if (Object.keys(state.workouts).length === 0) {
     state = {
       ...state,
       workouts: defaultExercises.workouts,
